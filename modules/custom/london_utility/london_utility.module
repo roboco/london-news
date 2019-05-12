@@ -32,6 +32,7 @@ function london_utility_help($route_name, RouteMatchInterface $route_match) {
  */
 function london_utility_form_alter(&$form, FormStateInterface $form_state, $form_id) {
   if ($form_id == "node_article_edit_form") {
+    // Adds Description to title field for non Admin users.
     $current_user = \Drupal::currentUser();
     $roles = $current_user->getRoles();
     if (!array_search("administrator", $roles)) {
