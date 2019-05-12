@@ -1,0 +1,35 @@
+<?php
+
+/**
+ * @file
+ * Contains weather_field.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function weather_field_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the weather_field module.
+    case 'help.page.weather_field':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Stores location to return weather report') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function weather_field_theme() {
+  return [
+    'weather_field' => [
+      'render element' => 'children',
+    ],
+  ];
+}

@@ -1,0 +1,14 @@
+{
+  "name": "drupal/weather_field",
+  "type": "drupal-module",
+  "description": "Stores location to return weather report",
+  "keywords": ["Drupal"],
+  "license": "GPL-2.0+",
+  "homepage": "https://www.drupal.org/project/weather_field",
+  "minimum-stability": "dev",
+  "support": {
+    "issues": "https://www.drupal.org/project/issues/weather_field",
+    "source": "http://cgit.drupalcode.org/weather_field"
+  },
+  "require": { }
+}
