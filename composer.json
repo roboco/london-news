@@ -9,7 +9,9 @@
         "drupal/console": "~1.0",
         "drupal/paragraphs": "~1.0",
         "drupal/bootstrap": "~3.0",
-        "drush/drush": "~9.0"
+        "drush/drush": "~9.0",
+        "drupal/devel": "~2.1",
+        "drupal/twig_vardumper": "~1.2"
     },
     "replace": {
         "drupal/core": "^8.7"
