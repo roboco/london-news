@@ -1,0 +1,20 @@
+uuid: b83b2652-0c57-4d0f-ae6a-a24d1b7ef77c
+langcode: en
+status: true
+dependencies:
+  theme:
+    - londontheme
+_core:
+  default_config_hash: 1TQP4b3ZnlzvIH9bj6cpCz_SyUHdJjLQkZnHpikjjhw
+id: londontheme_page_title
+theme: londontheme
+region: header
+weight: 0
+provider: null
+plugin: page_title_block
+settings:
+  id: page_title_block
+  label: 'Page title'
+  provider: core
+  label_display: '0'
+visibility: {  }

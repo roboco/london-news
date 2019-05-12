@@ -1,0 +1,22 @@
+uuid: f1ce3906-1772-4edd-b64b-a73de2ac990e
+langcode: en
+status: true
+dependencies:
+  theme:
+    - londontheme
+_core:
+  default_config_hash: qHdtze2DZ2mFfaJadxjZz6epm92_SN9SAFY4yJGl8Fo
+id: londontheme_local_tasks
+theme: londontheme
+region: header
+weight: 10
+provider: null
+plugin: local_tasks_block
+settings:
+  id: local_tasks_block
+  label: Tabs
+  provider: core
+  label_display: '0'
+  primary: true
+  secondary: true
+visibility: {  }

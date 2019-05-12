@@ -1,0 +1,22 @@
+uuid: a8bf91e1-d8ed-4999-ba2c-d9fd8e2ddc68
+langcode: en
+status: true
+dependencies:
+  module:
+    - help
+  theme:
+    - londontheme
+_core:
+  default_config_hash: MhtNdV__HKRTab0ZPjkPNfYL4Ng4UPBucDLoC7Rg5Eo
+id: londontheme_help
+theme: londontheme
+region: help
+weight: -30
+provider: null
+plugin: help_block
+settings:
+  id: help_block
+  label: Help
+  provider: help
+  label_display: '0'
+visibility: {  }

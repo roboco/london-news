@@ -1,0 +1,22 @@
+uuid: 7e2d810d-ae93-4a02-bd69-00ddc0fc6a02
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.copy_wysiwyg.field_wysiwyg
+    - paragraphs.paragraphs_type.copy_wysiwyg
+  module:
+    - text
+id: paragraph.copy_wysiwyg.default
+targetEntityType: paragraph
+bundle: copy_wysiwyg
+mode: default
+content:
+  field_wysiwyg:
+    weight: 0
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: text_default
+    region: content
+hidden: {  }

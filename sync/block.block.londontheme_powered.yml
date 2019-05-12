@@ -1,0 +1,22 @@
+uuid: c421a56d-a433-4f8d-a8d5-fa7ce1a542ac
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - londontheme
+_core:
+  default_config_hash: iggZSiUKz4mYP1YPJ8SsUfFu79HIgOTt6IDy3Up59aM
+id: londontheme_powered
+theme: londontheme
+region: footer
+weight: -10
+provider: null
+plugin: system_powered_by_block
+settings:
+  id: system_powered_by_block
+  label: 'Powered by Drupal'
+  provider: system
+  label_display: '0'
+visibility: {  }

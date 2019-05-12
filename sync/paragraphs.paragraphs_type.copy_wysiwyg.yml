@@ -1,0 +1,9 @@
+uuid: bf7a1c63-da6d-4944-bab0-153d7d1f2620
+langcode: en
+status: true
+dependencies: {  }
+id: copy_wysiwyg
+label: 'Copy WYSIWYG'
+icon_uuid: null
+description: ''
+behavior_plugins: {  }

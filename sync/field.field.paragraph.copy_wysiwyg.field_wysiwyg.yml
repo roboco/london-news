@@ -1,0 +1,21 @@
+uuid: 782685a1-4675-4bdd-8674-bf6342b9328a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_wysiwyg
+    - paragraphs.paragraphs_type.copy_wysiwyg
+  module:
+    - text
+id: paragraph.copy_wysiwyg.field_wysiwyg
+field_name: field_wysiwyg
+entity_type: paragraph
+bundle: copy_wysiwyg
+label: WYSIWYG
+description: 'Article Copy'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

@@ -1,0 +1,22 @@
+uuid: 17aaf04f-1d32-41f8-ba7d-8a174885a9f4
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - londontheme
+_core:
+  default_config_hash: fNNLN48MSGSLiqwIFywCuxH2Dk_IxDbaP0kYhg_IPrg
+id: londontheme_content
+theme: londontheme
+region: content
+weight: 0
+provider: null
+plugin: system_main_block
+settings:
+  id: system_main_block
+  label: 'Main page content'
+  provider: system
+  label_display: '0'
+visibility: {  }

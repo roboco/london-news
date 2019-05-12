@@ -1,0 +1,14 @@
+uuid: 168b6765-f05a-4d8e-864c-4fe061da411a
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: vymHlgJy26BuI5GGj9-IXjwR3dRC5C0tij4BpWJnoqw
+id: feedback
+label: 'Website feedback'
+recipients:
+  - robinrew@gmail.com
+reply: ''
+weight: 0
+message: 'Your message has been sent.'
+redirect: ''
