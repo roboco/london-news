@@ -15,7 +15,7 @@ use Drupal\Core\TypedData\DataDefinition;
  *
  * @FieldType(
  *   id = "weather_field_type",
- *   label = @Translation("Weather field type"),
+ *   label = @Translation("Weather Field"),
  *   description = @Translation("Weather Query Settings"),
  *   default_widget = "weather_field_widget_type",
  *   default_formatter = "weather_field_formatter_type"
@@ -43,16 +43,16 @@ class WeatherFieldType extends FieldItemBase {
   public static function propertyDefinitions(FieldStorageDefinitionInterface $field_definition) {
     // Prevent early t() calls by using the TranslatableMarkup.
     $properties['location'] = DataDefinition::create('string')
-      ->setLabel(new TranslatableMarkup('Text value'))
+      ->setLabel(new TranslatableMarkup('Location'))
       ->setRequired(TRUE);
     $properties['num_days'] = DataDefinition::create('string')
-      ->setLabel(new TranslatableMarkup('Text value'))
+      ->setLabel(new TranslatableMarkup('Number of Days'))
       ->setRequired(TRUE);
     $properties['time_interval'] = DataDefinition::create('string')
-      ->setLabel(new TranslatableMarkup('Text value'))
+      ->setLabel(new TranslatableMarkup('Time Interval'))
       ->setRequired(TRUE);
     $properties['refresh_rate'] = DataDefinition::create('string')
-      ->setLabel(new TranslatableMarkup('Text value'))
+      ->setLabel(new TranslatableMarkup('Refresh Rate'))
       ->setRequired(TRUE);
 
     return $properties;
@@ -99,7 +99,7 @@ class WeatherFieldType extends FieldItemBase {
     if ($max_length = $this->getSetting('max_length')) {
       $constraint_manager = \Drupal::typedDataManager()->getValidationConstraintManager();
       $constraints[] = $constraint_manager->create('ComplexData', [
-        'value' => [
+        'location' => [
           'Length' => [
             'max' => $max_length,
             'maxMessage' => t('%name: may not be longer than @max characters.', [
@@ -112,15 +112,6 @@ class WeatherFieldType extends FieldItemBase {
     }
 
     return $constraints;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public static function generateSampleValue(FieldDefinitionInterface $field_definition) {
-    $random = new Random();
-    $values['value'] = $random->word(mt_rand(1, $field_definition->getSetting('max_length')));
-    return $values;
   }
 
   /**
@@ -146,8 +137,13 @@ class WeatherFieldType extends FieldItemBase {
    * {@inheritdoc}
    */
   public function isEmpty() {
-    $value = $this->get('value')->getValue();
-    return $value === NULL || $value === '';
+    $isEmpty =
+      empty($this->get('location')->getValue()) &&
+      empty($this->get('num_days')->getValue()) &&
+      empty($this->get('time_interval')->getValue()) &&
+      empty($this->get('refresh_rate')->getValue());
+
+    return $isEmpty;
   }
 
 }

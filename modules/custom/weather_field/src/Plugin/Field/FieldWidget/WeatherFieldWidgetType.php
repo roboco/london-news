@@ -11,7 +11,7 @@ use Drupal\Core\Form\FormStateInterface;
  *
  * @FieldWidget(
  *   id = "weather_field_widget_type",
- *   label = @Translation("Weather field widget type"),
+ *   label = @Translation("Weather Field Widget"),
  *   field_types = {
  *     "weather_field_type"
  *   }
@@ -70,8 +70,19 @@ class WeatherFieldWidgetType extends WidgetBase {
    * {@inheritdoc}
    */
   public function formElement(FieldItemListInterface $items, $delta, array $element, array &$form, FormStateInterface $form_state) {
-    $element['location'] = $element + [
+
+    // TODO: Could live in side panel.
+//    $element = [
+//      '#type' => 'details',
+//      '#title' => t('Weather Field Query'),
+//      '#group' => 'advanced',
+//      '#weight' => 100,
+//    ];
+
+
+    $element['location'] = [
       '#type' => 'textfield',
+      '#title' => $this->t('Location'),
       '#default_value' => isset($items[$delta]->value) ? $items[$delta]->value : NULL,
       '#description' => $this->t('UK Postcode, Pass US Zipcode, Canada Postalcode, IP address, Latitude/Longitude (decimal degree) or city name'),
       '#size' => $this->getSetting('size'),
@@ -80,7 +91,8 @@ class WeatherFieldWidgetType extends WidgetBase {
       '#attributes' => array('id' => 'wf-location'),
     ];
 
-    $element['num_days'] = $element + [
+    $element['num_days'] = [
+        '#title' => $this->t('Number of Days'),
         '#type' => 'select',
         '#default_value' => isset($items[$delta]->value) ? $items[$delta]->value : NULL,
         '#options' => [
@@ -92,7 +104,8 @@ class WeatherFieldWidgetType extends WidgetBase {
           ],
       ];
 
-    $element['time_interval'] = $element + [
+    $element['time_interval'] = [
+        '#title' => $this->t('time interval'),
         '#type' => 'select',
         '#default_value' => isset($items[$delta]->value) ? $items[$delta]->value : NULL,
         '#options' => [
@@ -104,7 +117,8 @@ class WeatherFieldWidgetType extends WidgetBase {
         ],
       ];
 
-    $element['refresh_rate'] = $element + [
+    $element['refresh_rate'] = [
+        '#title' => $this->t('Refresh Rate'),
         '#type' => 'select',
         '#default_value' => isset($items[$delta]->value) ? $items[$delta]->value : NULL,
         '#options' => [

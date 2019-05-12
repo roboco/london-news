@@ -20,6 +20,11 @@ interface WeatherFieldApiCallInterface {
   /**
    * @param mixed $postcode
    */
-  public function setPostcode($postcode);
+  public function setLocation($location);
+
+  /**
+   * @return mixed
+   */
+  public function getWeather();
 
 }

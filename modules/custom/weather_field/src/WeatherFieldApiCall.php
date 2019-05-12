@@ -1,8 +1,8 @@
 <?php
 
 namespace Drupal\weather_field;
-use Drupal\Core\Config\ConfigFactoryInterface;
 use GuzzleHttp\ClientInterface;
+use GuzzleHttp\Exception\RequestException;
 
 /**
  * Class WeatherFieldApiCall.
@@ -18,7 +18,7 @@ class WeatherFieldApiCall implements WeatherFieldApiCallInterface {
 
   protected $config;
 
-  private $postcode;
+  private $location;
 
   private $time_interval;
 
@@ -30,7 +30,7 @@ class WeatherFieldApiCall implements WeatherFieldApiCallInterface {
    * @return mixed
    */
   public function getWeather() {
-    $this->weather = $this->buildRequest();
+    $this->weather = $this->response();
     return $this->weather;
   }
 
@@ -51,23 +51,58 @@ class WeatherFieldApiCall implements WeatherFieldApiCallInterface {
   /**
    * @param mixed $postcode
    */
-  public function setPostcode($postcode) {
-    $this->postcode = $postcode;
+  public function setLocation($location) {
+    $this->location = $location;
   }
 
   /**
    * Constructs a new WeatherFieldApiCall object.
    * @param \GuzzleHttp\ClientInterface $http_client
-   * @param \Drupal\Core\Config\ConfigFactoryInterface $config
    */
-  public function __construct(ClientInterface $http_client, ConfigFactoryInterface $config) {
+  public function __construct(ClientInterface $http_client) {
     $this->httpClient = $http_client;
-    $this->config = $config;
   }
 
+  private function response() {
+    $url = $this->buildRequest();
+    $status = '';
+    try {
+      $request = $this->httpClient->request('GET', $url);
+      $status = $request->getStatusCode();
+      $transfer_success = $request->getBody()->getContents();
+      return $transfer_success;
+    }
+    catch (RequestException $e) {
+      $message = 'Weather Field E-petition api request failed with' . $e . '::' . $status;
+      \Drupal::logger('weather_field')->error($message);
+    }
+    return false;
+  }
+
+  /**
+   * @param $red_type
+   * @param $url_params
+   *
+   * @return string
+   */
   private function buildRequest() {
-    $weather = "breexy";
-    return $weather;
+    $config = \Drupal::config('weather_field.weatherfieldconfig');
+    $url = $config->get('service_url');
+    $api_key = $config->get('api_key');
+    $data_format = $config->get('data_format');
+
+    $url_params = [
+      'key' => $api_key,
+      'q' => $this->location,
+      'format' => $data_format,
+      'num_of_days' => $this->num_days];
+
+    $url = $url . '/weather.ashx';
+    $url .= '?';
+    foreach ($url_params as $key => $value) {
+      $url .= $key . '=' . $value . '&';
+    }
+    return $url;
   }
 
 

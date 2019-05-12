@@ -2,12 +2,15 @@
 
 namespace Drupal\weather_field\Plugin\Field\FieldFormatter;
 
+use Drupal\Component\Serialization\Json;
 use Drupal\Component\Utility\Html;
+use Drupal\Core\Field\FieldDefinitionInterface;
 use Drupal\Core\Field\FieldItemInterface;
 use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Field\FormatterBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
+use Drupal\weather_field\WeatherFieldApiCallInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 
@@ -16,7 +19,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  *
  * @FieldFormatter(
  *   id = "weather_field_formatter_type",
- *   label = @Translation("Weather field formatter type"),
+ *   label = @Translation("Weather Field Formatter"),
  *   field_types = {
  *     "weather_field_type"
  *   }
@@ -25,6 +28,20 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 class WeatherFieldFormatterType extends FormatterBase implements ContainerFactoryPluginInterface {
 
 
+  /**
+   * The entity manager service
+   *
+   * @var \Drupal\Core\Entity\EntityManagerInterface
+   */
+  protected $weatherFieldApiCall;
+
+  /**
+   * @param \Symfony\Component\DependencyInjection\ContainerInterface $container
+   * @param array $configuration
+   * @param string $plugin_id
+   * @param mixed $plugin_definition
+   * @return static
+   */
   public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
     return new static(
       $plugin_id,
@@ -36,6 +53,24 @@ class WeatherFieldFormatterType extends FormatterBase implements ContainerFactor
       $configuration['third_party_settings'],
       $container->get('weather_field.api_call')
     );
+  }
+
+
+  /**
+   * Construct a MyFormatter object
+   *
+   * @param $plugin_id
+   * @param $plugin_definition
+   * @param \Drupal\weather_field\Plugin\Field\FieldFormatter\FieldDefinitionInterface $field_definition
+   * @param array $settings
+   * @param $label
+   * @param $view_mode
+   * @param array $third_party_settings
+   * @param \Drupal\weather_field\WeatherFieldApiCallInterface $weatherFieldApiCall
+   */
+  public function __construct($plugin_id, $plugin_definition, FieldDefinitionInterface $field_definition, array $settings, $label, $view_mode, array $third_party_settings, WeatherFieldApiCallInterface $weatherFieldApiCall) {
+    parent::__construct($plugin_id, $plugin_definition, $field_definition, $settings, $label, $view_mode, $third_party_settings);
+    $this->weatherFieldApiCall = $weatherFieldApiCall;
   }
 
   /**
@@ -73,31 +108,19 @@ class WeatherFieldFormatterType extends FormatterBase implements ContainerFactor
     $elements = array();
 
     foreach ($items as $delta => $item) {
-      $location = $item->location;
-      $weather = $this->
+      $this->weatherFieldApiCall->setLocation($item->location);
+      $this->weatherFieldApiCall->setNumDays($item->num_days);
+      $this->weatherFieldApiCall->setTimeInterval($item->time_interval);
+
+      $weather = Json::decode($this->weatherFieldApiCall->getWeather());
       $elements[$delta] = array(
         '#theme' => 'weather_field_widget',
-        '#location' => $location,
+        '#location' => $item->location,
         '#weather' => $weather,
       );
     }
 
     return $elements;
-  }
-
-  /**
-   * Generate the output appropriate for one field item.
-   *
-   * @param \Drupal\Core\Field\FieldItemInterface $item
-   *   One field item.
-   *
-   * @return string
-   *   The textual output generated.
-   */
-  protected function viewValue(FieldItemInterface $item) {
-    // The text value has no text format assigned to it, so the user input
-    // should equal the output, including newlines.
-    return nl2br(Html::escape($item->value));
   }
 
 }
