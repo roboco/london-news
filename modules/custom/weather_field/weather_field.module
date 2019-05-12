@@ -27,9 +27,10 @@ function weather_field_help($route_name, RouteMatchInterface $route_match) {
  * Implements hook_theme().
  */
 function weather_field_theme() {
-  return [
-    'weather_field' => [
-      'render element' => 'children',
-    ],
-  ];
+  return array(
+    'weather_field_widget' => array(
+      'variables' => array('location' => NULL, 'weather' => NULL),
+      'template' => 'weather-field-widget',
+    ),
+  );
 }

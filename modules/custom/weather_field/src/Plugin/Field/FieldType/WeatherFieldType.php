@@ -51,6 +51,9 @@ class WeatherFieldType extends FieldItemBase {
     $properties['time_interval'] = DataDefinition::create('string')
       ->setLabel(new TranslatableMarkup('Text value'))
       ->setRequired(TRUE);
+    $properties['refresh_rate'] = DataDefinition::create('string')
+      ->setLabel(new TranslatableMarkup('Text value'))
+      ->setRequired(TRUE);
 
     return $properties;
   }
@@ -72,6 +75,11 @@ class WeatherFieldType extends FieldItemBase {
           'binary' => $field_definition->getSetting('case_sensitive'),
         ],
         'time_interval' => [
+          'type' => $field_definition->getSetting('is_ascii') === TRUE ? 'varchar_ascii' : 'varchar',
+          'length' => (int) $field_definition->getSetting('max_length'),
+          'binary' => $field_definition->getSetting('case_sensitive'),
+        ],
+        'refresh_rate' => [
           'type' => $field_definition->getSetting('is_ascii') === TRUE ? 'varchar_ascii' : 'varchar',
           'length' => (int) $field_definition->getSetting('max_length'),
           'binary' => $field_definition->getSetting('case_sensitive'),

@@ -7,6 +7,9 @@ use Drupal\Core\Field\FieldItemInterface;
 use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Field\FormatterBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
+
 
 /**
  * Plugin implementation of the 'weather_field_formatter_type' formatter.
@@ -19,7 +22,21 @@ use Drupal\Core\Form\FormStateInterface;
  *   }
  * )
  */
-class WeatherFieldFormatterType extends FormatterBase {
+class WeatherFieldFormatterType extends FormatterBase implements ContainerFactoryPluginInterface {
+
+
+  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
+    return new static(
+      $plugin_id,
+      $plugin_definition,
+      $configuration['field_definition'],
+      $configuration['settings'],
+      $configuration['label'],
+      $configuration['view_mode'],
+      $configuration['third_party_settings'],
+      $container->get('weather_field.api_call')
+    );
+  }
 
   /**
    * {@inheritdoc}
@@ -53,10 +70,16 @@ class WeatherFieldFormatterType extends FormatterBase {
    * {@inheritdoc}
    */
   public function viewElements(FieldItemListInterface $items, $langcode) {
-    $elements = [];
+    $elements = array();
 
     foreach ($items as $delta => $item) {
-      $elements[$delta] = ['#markup' => $this->viewValue($item)];
+      $location = $item->location;
+      $weather = $this->
+      $elements[$delta] = array(
+        '#theme' => 'weather_field_widget',
+        '#location' => $location,
+        '#weather' => $weather,
+      );
     }
 
     return $elements;

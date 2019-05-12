@@ -70,13 +70,50 @@ class WeatherFieldWidgetType extends WidgetBase {
    * {@inheritdoc}
    */
   public function formElement(FieldItemListInterface $items, $delta, array $element, array &$form, FormStateInterface $form_state) {
-    $element['value'] = $element + [
+    $element['location'] = $element + [
       '#type' => 'textfield',
       '#default_value' => isset($items[$delta]->value) ? $items[$delta]->value : NULL,
+      '#description' => $this->t('UK Postcode, Pass US Zipcode, Canada Postalcode, IP address, Latitude/Longitude (decimal degree) or city name'),
       '#size' => $this->getSetting('size'),
       '#placeholder' => $this->getSetting('placeholder'),
       '#maxlength' => $this->getFieldSetting('max_length'),
+      '#attributes' => array('id' => 'wf-location'),
     ];
+
+    $element['num_days'] = $element + [
+        '#type' => 'select',
+        '#default_value' => isset($items[$delta]->value) ? $items[$delta]->value : NULL,
+        '#options' => [
+          '1' => $this->t('One'),
+          '2' => $this->t('Two'),
+          '3' => $this->t('Three'),
+          '4' => $this->t('Four'),
+          '5' => $this->t('Five')
+          ],
+      ];
+
+    $element['time_interval'] = $element + [
+        '#type' => 'select',
+        '#default_value' => isset($items[$delta]->value) ? $items[$delta]->value : NULL,
+        '#options' => [
+          '24' => $this->t('24 Hour'),
+          '12' => $this->t('12 Hour'),
+          '6' => $this->t('6 Hour'),
+          '3' => $this->t('3 Hour'),
+          '1' => $this->t('1 Hour')
+        ],
+      ];
+
+    $element['refresh_rate'] = $element + [
+        '#type' => 'select',
+        '#default_value' => isset($items[$delta]->value) ? $items[$delta]->value : NULL,
+        '#options' => [
+          '60' => $this->t('1 min'),
+          '3600' => $this->t('5 min'),
+          'page' => $this->t('On Page Refresh'),
+          'none' => $this->t('On New Cache Load')
+        ],
+      ];
 
     return $element;
   }
