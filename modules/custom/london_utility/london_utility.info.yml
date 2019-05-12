@@ -1,0 +1,5 @@
+name: 'London Utility'
+type: module
+description: 'Custom functions and features uniwue to site'
+core: 8.x
+package: 'Custom'

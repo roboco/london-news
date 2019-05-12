@@ -1,0 +1,41 @@
+<?php
+
+/**
+ * @file
+ * Contains london_utility.module.
+ */
+
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function london_utility_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the london_utility module.
+    case 'help.page.london_utility':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Custom functions and features uniwue to site') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+
+/**
+ * @param $form
+ * @param \Drupal\Core\Form\FormStateInterface $form_state
+ * @param $form_id
+ */
+function london_utility_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  if ($form_id == "node_article_edit_form") {
+    $current_user = \Drupal::currentUser();
+    $roles = $current_user->getRoles();
+    if (!array_search("administrator", $roles)) {
+      $form['title']['widget'][0]['value']['#description'] = t('lorem ipsum dolor sit amet, consectetur adipiscing elit.');
+    }
+  }
+}
