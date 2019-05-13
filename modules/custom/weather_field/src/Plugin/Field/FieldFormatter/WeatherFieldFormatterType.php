@@ -3,9 +3,7 @@
 namespace Drupal\weather_field\Plugin\Field\FieldFormatter;
 
 use Drupal\Component\Serialization\Json;
-use Drupal\Component\Utility\Html;
 use Drupal\Core\Field\FieldDefinitionInterface;
-use Drupal\Core\Field\FieldItemInterface;
 use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Field\FormatterBase;
 use Drupal\Core\Form\FormStateInterface;
@@ -112,12 +110,18 @@ class WeatherFieldFormatterType extends FormatterBase implements ContainerFactor
       $this->weatherFieldApiCall->setNumDays($item->num_days);
       $this->weatherFieldApiCall->setTimeInterval($item->time_interval);
 
-      $weather = Json::decode($this->weatherFieldApiCall->getWeather());
-      $elements[$delta] = array(
-        '#theme' => 'weather_field_widget',
-        '#location' => $item->location,
-        '#weather' => $weather,
-      );
+        $weather = Json::decode($this->weatherFieldApiCall->getWeather());
+        $current_weather = $weather['data']['current_condition'][0]['weatherDesc'][0]['value'];
+        $weather_icon = $weather['data']['current_condition'][0]['weatherIconUrl'][0]['value'];
+        $temp = $weather['data']['current_condition'][0]['temp_C'];
+        $elements[$delta] = array(
+            '#theme' => 'weather_field_widget',
+            '#location' => $item->location,
+            '#currentWeather' => $current_weather,
+            '#weatherIcon' => $weather_icon,
+            '#temperature' => $temp,
+            '#weather' => $weather,
+        );
     }
 
     return $elements;
