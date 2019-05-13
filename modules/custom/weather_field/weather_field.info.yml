@@ -1,5 +1,0 @@
-name: 'Weather Field'
-type: module
-description: 'Stores location to return weather report'
-core: 8.x
-package: 'Custom'

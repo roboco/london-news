@@ -8,10 +8,12 @@ dependencies:
     - field.field.node.article.field_image
     - field.field.node.article.field_main_content
     - field.field.node.article.field_tags
+    - field.field.node.article.field_weather_field
     - node.type.article
   module:
     - entity_reference_revisions
     - user
+    - weather_field
 _core:
   default_config_hash: ChmU3AVqDKU32A_fyChG0W9dTRKmVBR58B6OClCLvZI
 id: node.article.default
@@ -21,12 +23,19 @@ mode: default
 content:
   field_main_content:
     type: entity_reference_revisions_entity_view
-    weight: 0
+    weight: 1
     label: hidden
     settings:
       view_mode: default
       link: ''
     third_party_settings: {  }
+    region: content
+  field_weather_field:
+    weight: 0
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: weather_field_formatter_type
     region: content
 hidden:
   body: true

@@ -1,0 +1,22 @@
+uuid: 193e3a58-cfdc-4f17-8466-67a2cfbaa156
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - weather_field
+id: node.field_weather_field
+field_name: field_weather_field
+entity_type: node
+type: weather_field_type
+settings:
+  max_length: '255'
+  is_ascii: false
+  case_sensitive: false
+module: weather_field
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

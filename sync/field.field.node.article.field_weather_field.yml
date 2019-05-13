@@ -1,0 +1,26 @@
+uuid: 8e2a47a7-3874-4ae6-a425-34e8911a5413
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_weather_field
+    - node.type.article
+  module:
+    - weather_field
+id: node.article.field_weather_field
+field_name: field_weather_field
+entity_type: node
+bundle: article
+label: 'Weather Field'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    location: ''
+    num_days: '1'
+    time_interval: '24'
+    refresh_rate: '60'
+default_value_callback: ''
+settings: {  }
+field_type: weather_field_type

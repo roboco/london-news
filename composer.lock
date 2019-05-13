@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4ec828e9a2b46f9bc23532d36a84f27a",
+    "content-hash": "bb0b0653114ee7b9fee67e46be0bb58b",
     "packages": [
         {
             "name": "alchemy/zippy",
@@ -2597,6 +2597,52 @@
                 "source": "http://cgit.drupalcode.org/twig_vardumper",
                 "issues": "https://www.drupal.org/project/issues/twig_vardumper"
             }
+        },
+        {
+            "name": "drupal/weather_field",
+            "version": "dev-1.x",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/weather_field.git",
+                "reference": "001e3c48a1ebe94f2677aad2993e4165b7c9205d"
+            },
+            "require": {
+                "drupal/core": "~8.0"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "branch-alias": {
+                    "dev-1.x": "1.x-dev"
+                },
+                "drupal": {
+                    "version": "8.x-1.x-dev",
+                    "datestamp": "1557734585",
+                    "security-coverage": {
+                        "status": "not-covered",
+                        "message": "Project has not opted into security advisory coverage!"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "roborew",
+                    "homepage": "https://www.drupal.org/user/1931814"
+                }
+            ],
+            "description": "Stores location to return weather report",
+            "homepage": "https://www.drupal.org/project/weather_field",
+            "keywords": [
+                "Drupal"
+            ],
+            "support": {
+                "source": "http://cgit.drupalcode.org/weather_field",
+                "issues": "https://www.drupal.org/project/issues/weather_field"
+            },
+            "time": "2019-05-13T07:58:12+00:00"
         },
         {
             "name": "drush/drush",
@@ -8379,6 +8425,7 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
+        "drupal/weather_field": 20,
         "behat/mink": 20,
         "behat/mink-selenium2-driver": 20
     },

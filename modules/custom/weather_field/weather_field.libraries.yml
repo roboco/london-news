@@ -1,5 +1,0 @@
-weather_field-library:
-  js:
-    js/refreshweather.js: {}
-  dependencies:
-    - core/drupal.ajax

@@ -1,5 +1,0 @@
-weather_field:
-  api_key: ""
-  service_url: "https://api.worldweatheronline.com/premium/v1/"
-  service_type: "weather"
-  format: "json"

@@ -1,4 +1,0 @@
-services:
-  weather_field.api_call:
-    class: Drupal\weather_field\WeatherFieldApiCall
-    arguments: ['@http_client', '@config.factory']

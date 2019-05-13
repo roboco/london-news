@@ -1,0 +1,11 @@
+weather_field:
+  api_key: ''
+  service_url: 'https://api.worldweatheronline.com/premium/v1/'
+  service_type: weather
+  format: json
+_core:
+  default_config_hash: CnMiO1IXybeY84l3LB_eZ6gigz3VJZi-fvBrNc4MLUg
+api_key: 6d208b6ee8754e6fb4f224816191105
+service_url: 'https://api.worldweatheronline.com/premium/v1/'
+service_type: weather
+data_format: json

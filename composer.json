@@ -8,6 +8,7 @@
         "wikimedia/composer-merge-plugin": "^1.4",
         "drupal/console": "~1.0",
         "drupal/paragraphs": "~1.0",
+        "drupal/weather_field": "1.x-dev",
         "drupal/bootstrap": "~3.0",
         "drush/drush": "~9.0",
         "drupal/devel": "~2.1",
